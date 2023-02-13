@@ -23,8 +23,8 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Upgrade packaging tools
-        run: pip install --upgrade pip setuptools
+        run: pip install --upgrade pip setuptools virtualenv pipenv
       - name: Install Tox and any other packages
-        run: pip install -r requirements-dev.txt
+        run: pipenv install --dev
       - name: Run Tox factors for ${{ matrix.python }}
-        run: TOXFACTOR=clean,py$(sed 's/\.//' <<< "${{ matrix.python }}") tox
+        run: TOXFACTOR=py$(sed 's/\.//' <<< "${{ matrix.python }}") pipenv run tox
