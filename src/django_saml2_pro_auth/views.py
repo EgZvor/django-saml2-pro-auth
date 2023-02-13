@@ -49,7 +49,7 @@ def saml_login(request):
                 return HttpResponseRedirect(OneLogin_Saml2_Utils.get_self_url(req))
         else:
             error_reason = auth.get_last_error_reason()
-            raise SAMLError("ERRORS FOUND IN SAML REQUEST: %s: %s" % errors, error_reason)
+            raise SAMLError("ERRORS FOUND IN SAML REQUEST: %s: %s" % (errors, error_reason))
     elif "provider" in req["get_data"]:
         # SP Initiated
         if hasattr(settings, "SAML_REDIRECT"):
